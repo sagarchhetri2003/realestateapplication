@@ -7,18 +7,33 @@ class PaymentScreenView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+        leading: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: CircleBorder(),
+            padding: EdgeInsets.all(8),
+            backgroundColor: Colors.grey.shade200,
+          ),
+          onPressed: () {
+            Navigator.pop(context); // Destroy the current page and go back
+          },
+          child: Icon(Icons.arrow_back, color: Colors.black, size: 20),
         ),
         actions: [
-          TextButton(
-            onPressed: () {},
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(8),
+              backgroundColor: Colors.grey.shade200,
+            ),
+            onPressed: () {
+              Navigator.pop(context); // Destroy the current page and skip
+            },
             child: Text(
               "Skip",
-              style: TextStyle(color: Colors.grey, fontSize: 16),
+              style: TextStyle(color: Colors.black, fontSize: 12),
             ),
           ),
+          SizedBox(width: 8),
         ],
       ),
       body: Padding(
@@ -26,7 +41,7 @@ class PaymentScreenView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16),
+            SizedBox(height: 32),
             Text(
               "Add your payment method",
               style: TextStyle(
@@ -35,21 +50,35 @@ class PaymentScreenView extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 16),
             Text(
               "You can edit this later on your account setting.",
               style: TextStyle(color: Colors.grey, fontSize: 16),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                PaymentOptionWidget(assetPath: 'assets/icons/esewa.png'),
-                PaymentOptionWidget(assetPath: 'assets/icons/khalti.png'),
-                PaymentOptionWidget(assetPath: 'assets/icons/visa.png'),
+                GestureDetector(
+                  onTap: () {
+                    // No hover effect anymore, just highlight selected
+                  },
+                  child: PaymentOptionWidget(
+                    assetPath: 'assets/icons/esewa.png',
+                    isSelected: true, // Highlight eSewa
+                  ),
+                ),
+                PaymentOptionWidget(
+                  assetPath: 'assets/icons/khalti.png',
+                  isSelected: false,
+                ),
+                PaymentOptionWidget(
+                  assetPath: 'assets/icons/visa.png',
+                  isSelected: false,
+                ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 32),
             TextField(
               decoration: InputDecoration(
                 labelText: "Esewa ID",
@@ -58,7 +87,7 @@ class PaymentScreenView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 32),
             TextField(
               decoration: InputDecoration(
                 labelText: "Password",
@@ -68,21 +97,23 @@ class PaymentScreenView extends StatelessWidget {
               ),
             ),
             Spacer(),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: Colors.green,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(double.infinity, 50),
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  "Next",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
-              onPressed: () {},
-              child: Text(
-                "Next",
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
             ),
-            SizedBox(height: 16),
           ],
         ),
       ),
@@ -92,21 +123,37 @@ class PaymentScreenView extends StatelessWidget {
 
 class PaymentOptionWidget extends StatelessWidget {
   final String assetPath;
+  final bool isSelected;
 
-  PaymentOptionWidget({required this.assetPath});
+  PaymentOptionWidget({required this.assetPath, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      width: 50,
+      height: 70,
+      width: 70,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(
+          color: isSelected ? Colors.green : Colors.grey.shade300,
+          width: isSelected ? 2 : 1,
+        ),
+        boxShadow: isSelected
+            ? [
+                BoxShadow(
+                  color: Colors.green.withOpacity(0.3),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                ),
+              ]
+            : [],
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset(assetPath), // Replace with your payment method logos
+        child: Image.asset(
+          assetPath,
+          // You can apply a bold style to the icon or adjust the visual elements here
+        ),
       ),
     );
   }
