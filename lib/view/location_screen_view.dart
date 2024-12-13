@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:realestateapplication/view/login_screen_view.dart';
+import 'package:realestateapplication/view/payment_screen_view.dart';
 
 class LocationScreenView extends StatelessWidget {
   @override
@@ -16,7 +18,7 @@ class LocationScreenView extends StatelessWidget {
           child: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {
-              Navigator.pop(context); // Destroy the current page and go back
+              Navigator.pop(context); // Go back to the previous screen
             },
           ),
         ),
@@ -29,7 +31,11 @@ class LocationScreenView extends StatelessWidget {
             ),
             child: TextButton(
               onPressed: () {
-                Navigator.pop(context); // Destroy the current page and skip
+                // Navigate to LoginScreenView when "Skip" is pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreenView()),
+                );
               },
               child: Text(
                 "Skip",
@@ -72,10 +78,9 @@ class LocationScreenView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            // Changed GestureDetector to TextField for editable location
             TextField(
               decoration: InputDecoration(
-                labelText: "Location detail", // Label for the input field
+                labelText: "Location detail",
                 prefixIcon: Icon(Icons.location_on, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -88,8 +93,7 @@ class LocationScreenView extends StatelessWidget {
             ),
             Spacer(),
             Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 32.0), // Lift "Next" button a little bit higher
+              padding: const EdgeInsets.only(bottom: 32.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
@@ -99,7 +103,12 @@ class LocationScreenView extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Add any action for the "Next" button here
+                  // Navigate to PaymentScreenView when "Next" is pressed
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PaymentScreenView()),
+                  );
                 },
                 child: Text(
                   "Next",

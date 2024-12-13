@@ -1,133 +1,35 @@
-// // Login Screen
-// import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-// class LoginScreenView extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Column(
-//         children: [
-//           // Image that covers 30% of the screen
-//           Container(
-//             height: MediaQuery.of(context).size.height *
-//                 0.3, // 30% of screen height
-//             width: double.infinity,
-//             child: Image.asset(
-//               'assets/logo/login_logo.png',
-//               fit: BoxFit.fitWidth, // Ensures the full width of the image fits
-//               alignment:
-//                   Alignment.topCenter, // Aligns the image to the top center
-//             ),
-//           ),
-
-//           Expanded(
-//             child: Padding(
-//               padding: EdgeInsets.symmetric(horizontal: 24),
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 crossAxisAlignment: CrossAxisAlignment.stretch,
-//                 children: [
-//                   Text(
-//                     "Let's Sign In",
-//                     textAlign: TextAlign.center,
-//                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//                   ),
-//                   SizedBox(height: 24),
-//                   TextField(
-//                     decoration: InputDecoration(
-//                       labelText: 'Email',
-//                       prefixIcon: Icon(Icons.email),
-//                       border: OutlineInputBorder(
-//                         borderRadius: BorderRadius.circular(12),
-//                       ),
-//                     ),
-//                   ),
-//                   SizedBox(height: 16),
-//                   TextField(
-//                     obscureText: true,
-//                     decoration: InputDecoration(
-//                       labelText: 'Password',
-//                       prefixIcon: Icon(Icons.lock),
-//                       border: OutlineInputBorder(
-//                         borderRadius: BorderRadius.circular(12),
-//                       ),
-//                     ),
-//                   ),
-//                   SizedBox(height: 16),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       TextButton(
-//                         onPressed: () {},
-//                         child: Text(
-//                           'Forgot password?',
-//                           style: TextStyle(color: Colors.blue),
-//                         ),
-//                       ),
-//                       TextButton(
-//                         onPressed: () {},
-//                         child: Text(
-//                           'Show',
-//                           style: TextStyle(color: Colors.blue),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   SizedBox(height: 16),
-//                   ElevatedButton(
-//                     onPressed: () {},
-//                     child: Text('Sign In'),
-//                     style: ElevatedButton.styleFrom(
-//                       shape: RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(12),
-//                       ),
-//                     ),
-//                   ),
-//                   SizedBox(height: 16),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       Text('Don\'t have an account? '),
-//                       GestureDetector(
-//                         onTap: () {},
-//                         child: Text(
-//                           'Register',
-//                           style: TextStyle(fontWeight: FontWeight.bold),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                   SizedBox(height: 24),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       IconButton(
-//                         onPressed: () {},
-//                         icon:
-//                             FaIcon(FontAwesomeIcons.google, color: Colors.red),
-//                       ),
-//                       IconButton(
-//                         onPressed: () {},
-//                         icon: FaIcon(FontAwesomeIcons.facebook,
-//                             color: Colors.blue),
-//                       ),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:realestateapplication/view/dashboard_screen_view.dart';
+import 'package:realestateapplication/view/register_screen_view.dart';
 
 class LoginScreenView extends StatelessWidget {
+  // Static admin credentials
+  final String adminEmail = 'admin';
+  final String adminPassword = 'admin';
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  // Validate login credentials
+  void _validateLogin(BuildContext context) {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (email == adminEmail && password == adminPassword) {
+      // Navigate to DashboardScreenView
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => DashboardScreenView()),
+      );
+    } else {
+      // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Invalid email or password')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,6 +63,7 @@ class LoginScreenView extends StatelessWidget {
 
                   // Email Input
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       prefixIcon: Icon(Icons.email),
@@ -173,6 +76,7 @@ class LoginScreenView extends StatelessWidget {
 
                   // Password Input
                   TextField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
@@ -208,7 +112,7 @@ class LoginScreenView extends StatelessWidget {
 
                   // Sign In Button
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => _validateLogin(context),
                     child: Text('Sign In'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -217,9 +121,7 @@ class LoginScreenView extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(
-                      height:
-                          16), // Reduced space between Sign In button and divider
+                  SizedBox(height: 16),
 
                   // Divider with OR text
                   Row(
@@ -239,8 +141,7 @@ class LoginScreenView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                      height: 12), // Reduced space between divider and buttons
+                  SizedBox(height: 12),
 
                   // Facebook and Google Buttons
                   Row(
@@ -278,18 +179,24 @@ class LoginScreenView extends StatelessWidget {
                     ],
                   ),
 
-                  Spacer(flex: 1), // Adds minimal space below buttons
+                  Spacer(),
 
                   // Don't have an account? Register
                   Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 100), // Slightly above the bottom
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('Don\'t have an account? '),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            // Navigate to RegisterScreenView
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterScreenView()),
+                            );
+                          },
                           child: Text(
                             'Register',
                             style: TextStyle(fontWeight: FontWeight.bold),
