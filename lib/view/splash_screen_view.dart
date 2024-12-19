@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:realestateapplication/view/location_screen_view.dart';
 
 class SplashScreenView extends StatelessWidget {
+  const SplashScreenView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,7 +11,7 @@ class SplashScreenView extends StatelessWidget {
         children: [
           // Full-Screen Background
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/splashbg.png'),
                 fit: BoxFit.cover,
@@ -39,7 +41,7 @@ class SplashScreenView extends StatelessWidget {
                   children: [
                     // Lower Background Image
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/images/splashbgcolor.png'),
                           fit: BoxFit.cover,
@@ -58,13 +60,15 @@ class SplashScreenView extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LocationScreenView(),
+                                  builder: (context) =>
+                                      const LocationScreenView(),
                                 ),
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              padding: EdgeInsets.symmetric(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 98, 176, 240),
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 40,
                                 vertical: 15,
                               ),
@@ -72,7 +76,7 @@ class SplashScreenView extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            child: Text(
+                            child: const Text(
                               "Let's start",
                               style: TextStyle(
                                 color: Colors.white,
@@ -80,9 +84,9 @@ class SplashScreenView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           // Footer Text
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 'Made with love',
@@ -101,7 +105,7 @@ class SplashScreenView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                         ],
                       ),
                     ),
