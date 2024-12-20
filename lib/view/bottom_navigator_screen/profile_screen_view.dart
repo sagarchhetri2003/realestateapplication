@@ -10,6 +10,7 @@ class ProfileScreenView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        automaticallyImplyLeading: false, // Removes the back button
         actions: [
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.black),
@@ -64,6 +65,7 @@ class ProfileScreenView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+
             // Stats Section
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -74,6 +76,7 @@ class ProfileScreenView extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
+
             // Transaction/Tab Section
             Container(
               padding: const EdgeInsets.all(8),
@@ -91,6 +94,7 @@ class ProfileScreenView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+
             // Transactions Section
             const Text(
               '2 transactions',
@@ -168,11 +172,11 @@ class ProfileScreenView extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               const Text(
-                                'Rent',
+                                'Sold',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.green,
+                                  color: Colors.blue,
                                 ),
                               ),
                             ],

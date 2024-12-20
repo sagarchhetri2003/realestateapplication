@@ -1,19 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class FavoriteScreenView extends StatelessWidget {
-//   const FavoriteScreenView({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(
-//       child: Text(
-//         'Favorite',
-//         style: TextStyle(fontFamily: 'Montserrat Regular', fontSize: 20),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 
 class FavoriteScreenView extends StatelessWidget {
@@ -26,15 +10,12 @@ class FavoriteScreenView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          'My favorite',
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Montserrat Bold',
-            fontSize: 18,
-          ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous screen
+          },
         ),
-        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.delete_outline, color: Colors.black),
@@ -128,7 +109,7 @@ class FavoriteScreenView extends StatelessWidget {
                                 ),
                                 child: const Icon(
                                   Icons.favorite,
-                                  color: Colors.green,
+                                  color: Colors.blue,
                                   size: 20,
                                 ),
                               ),
@@ -167,7 +148,7 @@ class FavoriteScreenView extends StatelessWidget {
                                     style: const TextStyle(
                                       fontSize: 14,
                                       fontFamily: 'Montserrat Bold',
-                                      color: Colors.green,
+                                      color: Colors.black,
                                     ),
                                   ),
                                   Row(
