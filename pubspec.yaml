@@ -83,6 +83,10 @@ flutter:
     - family: Montserrat Regular
       fonts:
         - asset: assets/fonts/Montserrat-Regular.ttf
+
+    - family: Montserrat Bold
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
