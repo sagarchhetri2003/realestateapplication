@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:softwarica_student_management_bloc/features/auth/domain/entity/student_entity.dart';
+import 'package:realestateapplication/core/error/failure.dart';
 
-import '../../../../core/error/failure.dart';
+import '../entity/auth_entity.dart';
 
-abstract interface class IAuthRepository{
-  Future <Either <Failure, void>> createStudent(StudentEntity studentEntity);
-  Future <Either <Failure, List<StudentEntity>>> getAllStudents();
-  Future <Either <Failure, void>> deleteStudent(String id);
+abstract interface class IAuthRepository {
+  Future<Either<Failure, void>> registerUser(AuthEntity user);
+
+  Future<Either<Failure, String>> loginUser(String email, String password);
+
+  Future<Either<Failure, AuthEntity>> getCurrentUser();
 }

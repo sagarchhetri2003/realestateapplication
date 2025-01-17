@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:softwarica_student_management_bloc/app/di/di.dart';
-import 'package:softwarica_student_management_bloc/features/batch/presentation/view/batch_view.dart';
-import 'package:softwarica_student_management_bloc/features/batch/presentation/view_model/batch_bloc.dart';
+import 'package:realestateapplication/app/di/di.dart';
+import 'package:realestateapplication/features/auth/presentation/view/login_page.dart';
+import 'package:realestateapplication/features/auth/presentation/view_model/login/bloc/login_bloc.dart';
 
 class HomeState extends Equatable {
   final int selectedIndex;
@@ -26,8 +26,8 @@ class HomeState extends Equatable {
           child: Text('Course'),
         ),
         BlocProvider(
-          create: (context) => getIt<BatchBloc>(),
-          child: BatchView(),
+          create: (context) => getIt<LoginBloc>(),
+          child: LoginScreenView(),
         ),
         const Center(
           child: Text('Account'),

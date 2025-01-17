@@ -1,80 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:realestateapplication/app/constants/theme_constant.dart';
-
 
 class AppTheme {
-  AppTheme._();
+  // Light Theme
+  static ThemeData lightTheme = ThemeData(
+    primaryColor: const Color(0xFF62B0E8), // Primary color
+    scaffoldBackgroundColor: Colors.white,
+    appBarTheme: const AppBarTheme(
+      color: Color(0xFF62B0E8), // AppBar background color
+      elevation: 0, // No shadow
+      iconTheme: IconThemeData(color: Colors.white), // Icons in AppBar
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: Color(0xFF62B0E8), // Selected icon color
+      unselectedItemColor: Colors.grey, // Unselected icon color
+      selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontSize: 12),
+    ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.black, fontSize: 16),
+      bodyMedium: TextStyle(color: Colors.black54, fontSize: 14),
+      titleLarge: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+    ),
+  );
 
-  static getApplicationTheme({required bool isDarkMode}) {
-    return ThemeData(
-      // change the theme according to the user preference
-      colorScheme: isDarkMode
-          ? const ColorScheme.dark(
-              primary: ThemeConstant.darkPrimaryColor,
-            )
-          : const ColorScheme.light(
-              primary: Color.fromARGB(255, 17, 119, 20),
-            ),
-      brightness: isDarkMode ? Brightness.dark : Brightness.light,
-      fontFamily: 'Montserrat',
-      useMaterial3: true,
+  // Dark Theme
+  static ThemeData darkTheme = ThemeData(
+    primaryColor: const Color(0xFF1B1B1B), // Dark primary color
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    appBarTheme: const AppBarTheme(
+      color: Color(0xFF1B1B1B), // AppBar background color
+      elevation: 0, // No shadow
+      iconTheme: IconThemeData(color: Colors.white), // Icons in AppBar
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Color(0xFF1B1B1B),
+      selectedItemColor: Color(0xFF62B0E8), // Selected icon color
+      unselectedItemColor: Colors.grey, // Unselected icon color
+      selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontSize: 12),
+    ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.white, fontSize: 16),
+      bodyMedium: TextStyle(color: Colors.white70, fontSize: 14),
+      titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    ),
+  );
 
-      // Change app bar color
-      appBarTheme: const AppBarTheme(
-        elevation: 0,
-        backgroundColor: ThemeConstant.appBarColor,
-        centerTitle: true,
-        titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-        ),
-      ),
-
-      // Change elevated button theme
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          foregroundColor: Colors.white,
-          backgroundColor: ThemeConstant.primaryColor,
-          textStyle: const TextStyle(
-            fontSize: 20,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
-
-      // Change text field theme
-      inputDecorationTheme: const InputDecorationTheme(
-        contentPadding: EdgeInsets.all(15),
-        border: OutlineInputBorder(),
-        labelStyle: TextStyle(
-          fontSize: 20,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.red,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeConstant.primaryColor,
-          ),
-        ),
-      ),
-      // Circular progress bar theme
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: ThemeConstant.primaryColor,
-      ),
-      //Bottom navigation bar theme
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.lightGreen,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
-        elevation: 0,
-      ),
-    );
-  }
+  static getApplicationTheme({required bool isDarkMode}) {}
 }

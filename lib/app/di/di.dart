@@ -1,49 +1,76 @@
 // import 'package:get_it/get_it.dart';
-// import 'package:softwarica_student_management_bloc/features/auth/presentation/view_model/login/login_bloc.dart';
-// import 'package:softwarica_student_management_bloc/features/auth/presentation/view_model/signup/register_bloc.dart';
-// import 'package:softwarica_student_management_bloc/features/batch/presentation/view_model/batch_bloc.dart';
-// import 'package:softwarica_student_management_bloc/features/home/presentation/view_model/home_cubit.dart';
-// import 'package:softwarica_student_management_bloc/features/splash/presentation/view_model/splash_cubit.dart';
+// import '../../core/network/hive_service.dart';
+// import '../../features/auth/presentation/view_model/login/bloc/login_bloc.dart';
+// import '../../features/auth/presentation/view_model/signup/bloc/signup_bloc.dart';
+// import '../../features/splash/presentation/view_model/splash_cubit.dart';
 
 // final getIt = GetIt.instance;
 
 // Future<void> initDependencies() async {
-//   await _initBatchDependencies();
-//   await _initHomeDependencies();
-//   await _initRegisterDependencies();
+//   await _initHiveService();
+//   await _initSignupDependencies();
 //   await _initLoginDependencies();
-//   await _initSplashScreenDependencies();
+//   await _initSplashDependencies();
 // }
 
-// _initBatchDependencies() async {
-//   getIt.registerFactory<BatchBloc>(
-//     () => BatchBloc(),
-//   );
+// _initHiveService() {
+//   getIt.registerLazySingleton<HiveService>(() => HiveService());
 // }
 
-// _initHomeDependencies() async {
-//   getIt.registerFactory<HomeCubit>(
-//     () => HomeCubit(),
-//   );
-// }
-
-// _initRegisterDependencies() async {
-//   getIt.registerFactory<RegisterBloc>(
-//     () => RegisterBloc(),
+// _initSignupDependencies() async {
+//   getIt.registerFactory<SignupBloc>(
+//     () => SignupBloc(),
 //   );
 // }
 
 // _initLoginDependencies() async {
 //   getIt.registerFactory<LoginBloc>(
 //     () => LoginBloc(
-//       registerBloc: getIt<RegisterBloc>(),
-//       homeCubit: getIt<HomeCubit>(),
+//       signupBloc: getIt<SignupBloc>(),
 //     ),
 //   );
 // }
 
-// _initSplashScreenDependencies() async {
+// _initSplashDependencies() async {
 //   getIt.registerFactory<SplashCubit>(
-//     () => SplashCubit(getIt<LoginBloc>()),
+//     () => SplashCubit(getIt<SignupBloc>()),
 //   );
 // }
+
+import 'package:get_it/get_it.dart';
+import 'package:realestateapplication/core/network/hive_service.dart';
+import 'package:realestateapplication/features/auth/presentation/view_model/login/bloc/login_bloc.dart';
+import 'package:realestateapplication/features/auth/presentation/view_model/signup/bloc/signup_bloc.dart';
+
+import '../../features/splash/presentation/view_model/splash_cubit.dart';
+
+final getIt = GetIt.instance;
+
+Future<void> initDependencies() async {
+  await _initHiveService();
+  await _initSignupDependencies();
+  await _initLoginDependencies();
+  await _initSplashDependencies();
+}
+
+_initHiveService() {
+  getIt.registerLazySingleton<HiveService>(() => HiveService());
+}
+
+_initSignupDependencies() async {
+  getIt.registerFactory<SignupBloc>(
+    () => SignupBloc(),
+  );
+}
+
+_initLoginDependencies() async {
+  getIt.registerFactory<LoginBloc>(
+    () => LoginBloc(
+      signupBloc: getIt<SignupBloc>(),
+    ),
+  );
+}
+
+_initSplashDependencies() async {
+  getIt.registerFactory<SplashCubit>(() => SplashCubit(getIt<LoginBloc>()));
+}
