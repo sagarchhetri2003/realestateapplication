@@ -1,67 +1,61 @@
-// // import 'package:equatable/equatable.dart';
+// part of 'signup_bloc.dart';
 
-// // import 'package:equatable/equatable.dart';
+// abstract class SignupEvent extends Equatable {
+//   const SignupEvent();
 
-// // abstract class SignUpEvent extends Equatable {
-// //   @override
-// //   List<Object?> get props => [];
-// // }
-
-// // class SignUpSubmittedEvent extends SignUpEvent {
-// //   final String fullName;
-// //   final String email;
-// //   final String password;
-
-// //   SignUpSubmittedEvent({
-// //     required this.fullName,
-// //     required this.email,
-// //     required this.password,
-// //   });
-
-// //   @override
-// //   List<Object?> get props => [fullName, email, password];
-// // }
-
-// import 'package:equatable/equatable.dart';
-
-// abstract class SignUpEvent extends Equatable {
 //   @override
 //   List<Object?> get props => [];
 // }
 
-// class SignUpSubmittedEvent extends SignUpEvent {
-//   final String fullName;
-//   final String email;
-//   final String password;
+// class NavigateToLoginScreenEvent extends SignupEvent {
+//   final BuildContext context;
+//   final Widget destination;
 
-//   SignUpSubmittedEvent({
-//     required this.fullName,
-//     required this.email,
-//     required this.password,
+//   const NavigateToLoginScreenEvent({
+//     required this.context,
+//     required this.destination,
 //   });
 
 //   @override
-//   List<Object?> get props => [fullName, email, password];
+//   List<Object?> get props => [context, destination];
 // }
 
-part of 'signup_bloc.dart';
+import 'dart:io';
+
+import 'package:equatable/equatable.dart';
 
 abstract class SignupEvent extends Equatable {
-  const SignupEvent();
-
   @override
   List<Object?> get props => [];
 }
 
-class NavigateToLoginScreenEvent extends SignupEvent {
-  final BuildContext context;
-  final Widget destination;
+class SignupButtonPressed extends SignupEvent {
+  final String fullName;
+  final String phone;
+  final String address;
+  final String email;
+  final String password;
+  final String confirmPassword;
+  final File? profileImage;
 
-  const NavigateToLoginScreenEvent({
-    required this.context,
-    required this.destination,
+  SignupButtonPressed({
+    required this.fullName,
+    required this.phone,
+    required this.address,
+    required this.email,
+    required this.password,
+    required this.confirmPassword,
+    this.profileImage,
   });
 
   @override
-  List<Object?> get props => [context, destination];
+  List<Object?> get props => [
+        fullName,
+        phone,
+        address,
+        email,
+        password,
+        confirmPassword,
+        profileImage
+      ];
 }

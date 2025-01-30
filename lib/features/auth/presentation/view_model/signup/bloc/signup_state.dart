@@ -1,73 +1,28 @@
-// // part of 'register_bloc.dart';
+import 'package:equatable/equatable.dart';
 
-// // class SignupState {
-// //   final bool isLoading;
-// //   final bool isSuccess;
+abstract class SignupState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
-// //   SignupState({
-// //     required this.isLoading,
-// //     required this.isSuccess,
-// //   });
+class SignupInitial extends SignupState {}
 
-// //   SignupState.initial()
-// //       : isLoading = false,
-// //         isSuccess = false;
+class SignupLoading extends SignupState {}
 
-// //   SignupState copyWith({
-// //     bool? isLoading,
-// //     bool? isSuccess,
-// //   }) {
-// //     return SignupState(
-// //       isLoading: isLoading ?? this.isLoading,
-// //       isSuccess: isSuccess ?? this.isSuccess,
-// //     );
-// //   }
-// // }
+class SignupSuccess extends SignupState {
+  final String message;
 
-// import 'package:equatable/equatable.dart';
+  SignupSuccess(this.message);
 
-// abstract class SignUpState extends Equatable {
-//   @override
-//   List<Object?> get props => [];
-// }
+  @override
+  List<Object?> get props => [message];
+}
 
-// class SignUpInitialState extends SignUpState {}
+class SignupFailure extends SignupState {
+  final String error;
 
-// class SignUpLoadingState extends SignUpState {}
+  SignupFailure(this.error);
 
-// class SignUpSuccessState extends SignUpState {}
-
-// class SignUpErrorState extends SignUpState {
-//   final String errorMessage;
-
-//   SignUpErrorState({required this.errorMessage});
-
-//   @override
-//   List<Object?> get props => [errorMessage];
-// }
-
-part of 'signup_bloc.dart';
-
-class SignupState {
-  final bool isLoading;
-  final bool isSuccess;
-
-  SignupState({
-    required this.isLoading,
-    required this.isSuccess,
-  });
-
-  SignupState.initial()
-      : isLoading = false,
-        isSuccess = false;
-
-  SignupState copyWith({
-    bool? isLoading,
-    bool? isSuccess,
-  }) {
-    return SignupState(
-      isLoading: isLoading ?? this.isLoading,
-      isSuccess: isSuccess ?? this.isSuccess,
-    );
-  }
+  @override
+  List<Object?> get props => [error];
 }

@@ -5,21 +5,26 @@ import 'package:realestateapplication/features/auth/domain/entity/auth_entity.da
 import 'package:uuid/uuid.dart';
 
 part 'auth_hive_model.g.dart';
-
 @HiveType(typeId: HiveTableConstant.userTableId)
 class AuthHiveModel extends Equatable {
   @HiveField(0)
   final String? userId;
   @HiveField(1)
   final String fullname;
-  @HiveField(2)
-  final String email;
   @HiveField(3)
+  final String address;
+  @HiveField(4)
+  final String phonenumber;
+  @HiveField(5)
+  final String email;
+  @HiveField(6)
   final String password;
 
   AuthHiveModel({
     String? userId,
     required this.fullname,
+    required this.address,
+    required this.phonenumber,
     required this.email,
     required this.password,
   }) : userId = userId ?? const Uuid().v4();
@@ -28,6 +33,8 @@ class AuthHiveModel extends Equatable {
   const AuthHiveModel.initial()
       : userId = '',
         fullname = '',
+        address = '',
+        phonenumber = '',
         email = '',
         password = '';
 
@@ -36,6 +43,8 @@ class AuthHiveModel extends Equatable {
     return AuthHiveModel(
       userId: entity.userId,
       fullname: entity.fullname,
+      address: entity.address,
+      phonenumber: entity.phonenumber,
       email: entity.email,
       password: entity.password,
     );
@@ -45,11 +54,14 @@ class AuthHiveModel extends Equatable {
   AuthEntity toEntity() {
     return AuthEntity(
       fullname: fullname,
+      address: address,
+      phonenumber: phonenumber,
       email: email,
       password: password,
     );
   }
 
   @override
-  List<Object?> get props => [userId, fullname, email, password];
+  List<Object?> get props =>
+      [userId, fullname, address, phonenumber, email, password];
 }

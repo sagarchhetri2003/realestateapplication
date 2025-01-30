@@ -1,33 +1,41 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:realestateapplication/app/usecase/usecase.dart';
-import 'package:realestateapplication/features/auth/domain/entity/auth_entity.dart';
 
+import '../../../../app/usecase/usecase.dart';
 import '../../../../core/error/failure.dart';
+import '../entity/auth_entity.dart';
 import '../repository/auth_repository.dart';
 
 class RegisterUserParams extends Equatable {
   final String? userId;
   final String fullname;
+  final String phonenumber;
+  final String address;
   final String email;
   final String password;
 
   const RegisterUserParams({
     this.userId,
-    required this.fullname,
     required this.email,
+    required this.fullname,
+    required this.phonenumber,
+    required this.address,
     required this.password,
   });
 
+  //intial constructor
   const RegisterUserParams.initial({
     this.userId,
-    required this.fullname,
     required this.email,
+    required this.fullname,
+    required this.phonenumber,
+    required this.address,
     required this.password,
   });
 
   @override
-  List<Object?> get props => [userId, fullname, email, password];
+  List<Object?> get props => [userId, email, fullname, phonenumber,address, password];
 }
 
 class RegisterUseCase implements UsecaseWithParams<void, RegisterUserParams> {
@@ -36,19 +44,15 @@ class RegisterUseCase implements UsecaseWithParams<void, RegisterUserParams> {
   RegisterUseCase(this.repository);
 
   @override
-  Future<Either<Failure, void>> call(RegisterUserParams params) async {
-    try {
-      final authEntity = AuthEntity(
-        userId: params.userId,
-        fullname: params.fullname,
-        email: params.email,
-        password: params.password,
-      );
-
-      return await repository.registerUser(authEntity);
-    } catch (e) {
-      // Log or handle the error if necessary
-      return Left(Failure(message: 'Registration failed: ${e.toString()}'));
-    }
+  Future<Either<Failure, void>> call(RegisterUserParams params) {
+    final authEntity = AuthEntity(
+      userId: params.userId,
+      email: params.email,
+      fullname: params.fullname,
+      phonenumber:  params.phonenumber,
+      address:params.address,
+      password: params.password,
+    );
+    return repository.registerUser(authEntity);
   }
 }
