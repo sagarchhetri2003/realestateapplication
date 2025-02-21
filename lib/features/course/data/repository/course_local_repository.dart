@@ -1,9 +1,8 @@
 // import 'package:dartz/dartz.dart';
-// import 'package:realestateapplication/core/error/failure.dart';
-// import 'package:realestateapplication/features/course/domain/entity/course_entity.dart';
-// import 'package:realestateapplication/features/course/domain/repository/course_repository.dart';
-
-// import '../data_source/local_datasource/local_datasource.dart';
+// import 'package:softwarica_student_management_bloc/core/error/failure.dart';
+// import 'package:softwarica_student_management_bloc/features/course/data/data_source/local_datasource/course_local_data_source.dart';
+// import 'package:softwarica_student_management_bloc/features/course/domain/entity/course_entity.dart';
+// import 'package:softwarica_student_management_bloc/features/course/domain/repository/course_repository.dart';
 
 // class CourseLocalRepository implements ICourseRepository {
 //   final CourseLocalDataSource _courseLocalDataSource;
@@ -12,9 +11,9 @@
 //       : _courseLocalDataSource = courseLocalDataSource;
 
 //   @override
-//   Future<Either<Failure, void>> createCourse(CourseEntity courseEntity) {
+//   Future<Either<Failure, void>> createCourse(CourseEntity course) {
 //     try {
-//       _courseLocalDataSource.createCourse(courseEntity);
+//       _courseLocalDataSource.createCourse(course);
 //       return Future.value(Right(null));
 //     } catch (e) {
 //       return Future.value(Left(LocalDatabaseFailure(message: e.toString())));
@@ -22,26 +21,25 @@
 //   }
 
 //   @override
-//   Future<Either<Failure, void>> deleteCourse(id) async {
+//   Future<Either<Failure, void>> deleteCourse(String id) {
 //     try {
-//       await _courseLocalDataSource.deleteCourse(id);
-//       return Right(null);
+//       _courseLocalDataSource.deleteCourse(id);
+//       return Future.value(Right(null));
 //     } catch (e) {
-//       return Left(
-//         LocalDatabaseFailure(message: 'error deleting all batches:$e'),
-//       );
+//       return Future.value(Left(LocalDatabaseFailure(message: e.toString())));
 //     }
 //   }
 
 //   @override
-//   Future<Either<Failure, List<CourseEntity>>> getAllCourses() async {
+//   Future<Either<Failure, List<CourseEntity>>> getCourses() {
 //     try {
-//       final batches = await _courseLocalDataSource.getAllCourses();
-//       return Right(batches);
-//     } catch (e) {
-//       return Left(
-//         LocalDatabaseFailure(message: 'error getting all batches: $e'),
+//       return _courseLocalDataSource.getCourses().then(
+//         (value) {
+//           return Right(value);
+//         },
 //       );
+//     } catch (e) {
+//       return Future.value(Left(LocalDatabaseFailure(message: e.toString())));
 //     }
 //   }
 // }

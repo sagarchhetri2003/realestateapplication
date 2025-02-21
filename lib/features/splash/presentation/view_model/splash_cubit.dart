@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:realestateapplication/features/auth/presentation/view/login_page.dart';
-import 'package:realestateapplication/features/auth/presentation/view_model/login/bloc/login_bloc.dart';
+import 'package:realestateapplication/features/auth/presentation/view_model/signup/bloc/signup_bloc.dart';
+
+import '../../../auth/presentation/view/signup_page.dart';
 
 class SplashCubit extends Cubit<void> {
-  SplashCubit(this._loginBloc) : super(null);
+  SplashCubit(this._signupBloc) : super(null);
 
-  final LoginBloc _loginBloc;
+  final SignupBloc _signupBloc;
 
   Future<void> init(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 2), () async {
@@ -17,8 +18,8 @@ class SplashCubit extends Cubit<void> {
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-              value: _loginBloc,
-              child: LoginScreenView(),
+              value: _signupBloc,
+              child: SignupView(),
             ),
           ),
         );

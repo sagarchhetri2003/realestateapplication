@@ -1,61 +1,146 @@
-// part of 'signup_bloc.dart';
+// // import 'package:equatable/equatable.dart';
 
-// abstract class SignupEvent extends Equatable {
-//   const SignupEvent();
+// // abstract class SignupEvent extends Equatable {
+// //   @override
+// //   List<Object?> get props => [];
+// // }
+
+// // class SignupButtonPressed extends SignupEvent {
+// //   final String fullName;
+// //   final String phone;
+// //   final String address;
+// //   final String email;
+// //   final String password;
+// //   final String confirmPassword;
+// //   // final File? profileImage;
+
+// //   SignupButtonPressed({
+// //     required this.fullName,
+// //     required this.phone,
+// //     required this.address,
+// //     required this.email,
+// //     required this.password,
+// //     required this.confirmPassword,
+// //     // this.profileImage,
+// //   });
+
+// //   @override
+// //   List<Object?> get props => [
+// //         fullName,
+// //         phone,
+// //         address,
+// //         email,
+// //         password,
+// //         confirmPassword,
+// //         // profileImage
+// //       ];
+// // }
+
+// import 'dart:io';
+
+// import 'package:equatable/equatable.dart';
+// part of "signup_bloc.dart";
+
+// sealed class SignupEvent extends Equatable {
+//   RegisterEvent();
 
 //   @override
-//   List<Object?> get props => [];
+//   List<Object> get props => [];
 // }
 
-// class NavigateToLoginScreenEvent extends SignupEvent {
-//   final BuildContext context;
-//   final Widget destination;
+// class LoadImage extends SignupEvent {
+//   final File file;
 
-//   const NavigateToLoginScreenEvent({
-//     required this.context,
-//     required this.destination,
+//   LoadImage({
+//     required this.file,
 //   });
 
 //   @override
-//   List<Object?> get props => [context, destination];
+//   RegisterEvent() {
+//     // TODO: implement RegisterEvent
+//     throw UnimplementedError();
+//   }
 // }
 
-import 'dart:io';
+// class SignupUser extends SignupEvent {
+//   final BuildContext context;
+//   final String email;
+//   final String fullName;
+//   final String phonenumber;
+//   final String address;
+//   final String? image;
+//   final String password;
 
-import 'package:equatable/equatable.dart';
+//   const SignupUser({
+//     required this.context,
+//     required this.email,
+//     required this.fullName,
+//     required this.phonenumber,
+//     this.image,
+//     required this.password,
+//     required this.address,
+//   });
 
-abstract class SignupEvent extends Equatable {
+//   @override
+//   RegisterEvent() {
+//     // TODO: implement RegisterEvent
+//     throw UnimplementedError();
+//   }
+// }
+
+// // class NavigateLoginScreenEvent extends SignupEvent {
+// //   final BuildContext context;
+// //   final Widget destination;
+
+// //   const NavigateLoginScreenEvent({
+// //     required this.context,
+// //     required this.destination,
+// //   });
+// // }
+
+part of "signup_bloc.dart";
+
+sealed class SignupEvent extends Equatable {
+  const SignupEvent();
+
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-class SignupButtonPressed extends SignupEvent {
-  final String fullName;
-  final String phone;
-  final String address;
-  final String email;
-  final String password;
-  final String confirmPassword;
-  final File? profileImage;
+class LoadImage extends SignupEvent {
+  final File file;
 
-  SignupButtonPressed({
-    required this.fullName,
-    required this.phone,
-    required this.address,
-    required this.email,
-    required this.password,
-    required this.confirmPassword,
-    this.profileImage,
+  const LoadImage({
+    required this.file,
   });
-
-  @override
-  List<Object?> get props => [
-        fullName,
-        phone,
-        address,
-        email,
-        password,
-        confirmPassword,
-        profileImage
-      ];
 }
+
+class SignupUser extends SignupEvent {
+  final BuildContext context;
+  final String email;
+  final String fullName;
+  final String phonenumber;
+  final String address;
+  final String? image;
+  final String password;
+
+  const SignupUser({
+    required this.context,
+    required this.email,
+    required this.fullName,
+    required this.phonenumber,
+    required this.address,
+    this.image,
+    required this.password,
+  });
+}
+
+// class NavigateLoginScreenEvent extends SignupEvent {
+//   final BuildContext context;
+//   final Widget destination;
+
+//   const NavigateLoginScreenEvent({
+//     required this.context,
+//     required this.destination,
+//   });
+// }

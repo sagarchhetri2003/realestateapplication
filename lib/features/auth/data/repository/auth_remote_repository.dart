@@ -1,5 +1,6 @@
-import 'package:dartz/dartz.dart';
+import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../domain/entity/auth_entity.dart';
@@ -37,6 +38,15 @@ class AuthRemoteRepository implements IAuthRepository {
     try {
       await _authRemoteDataSource.registerUser(user);
       return const Right(null);
+    } catch (e) {
+      return Left(ApiFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> uploadProfilePicture(File file) async {
+    try {
+      return Right(await _authRemoteDataSource.uploadProfilePicture(file));
     } catch (e) {
       return Left(ApiFailure(message: e.toString()));
     }
