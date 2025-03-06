@@ -7,11 +7,11 @@ abstract class LoginEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class NavigateSignupScreenEvent extends LoginEvent {
+class NavigateRegisterScreenEvent extends LoginEvent {
   final BuildContext context;
   final Widget destination;
 
-  const NavigateSignupScreenEvent({
+  const NavigateRegisterScreenEvent({
     required this.context,
     required this.destination,
   });
@@ -20,11 +20,11 @@ class NavigateSignupScreenEvent extends LoginEvent {
   List<Object?> get props => [context, destination];
 }
 
-class LoginUserEvent extends LoginEvent {
+class LoginStudentEvent extends LoginEvent {
   final String email;
   final String password;
 
-  const LoginUserEvent({
+  const LoginStudentEvent({
     required this.email,
     required this.password,
   });
@@ -42,4 +42,3 @@ class NavigateHomeScreenEvent extends LoginEvent {
     required this.destination,
   });
 }
-//login event

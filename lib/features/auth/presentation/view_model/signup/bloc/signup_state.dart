@@ -1,37 +1,30 @@
 part of 'signup_bloc.dart';
 
-class SignupState extends Equatable {
-  final bool isLoading;
-  final bool isSuccess;
-  final String? imageName;
-
-  const SignupState({
-    required this.isLoading,
-    required this.isSuccess,
-    this.imageName,
-  });
-
-  factory SignupState.initial() {
-    return const SignupState(
-      isLoading: false,
-      isSuccess: false,
-      imageName: null,
-    );
-  }
-
-  SignupState copyWith({
-    bool? isLoading,
-    bool? isSuccess,
-    String? imageName,
-  }) {
-    return SignupState(
-      isLoading: isLoading ?? this.isLoading,
-      isSuccess: isSuccess ?? this.isSuccess,
-      imageName: imageName ?? this.imageName,
-    );
-  }
+abstract class SignupState extends Equatable {
+  const SignupState();
 
   @override
-  List<Object?> get props =>
-      [isLoading, isSuccess, imageName]; // ✅ Required for comparison
+  List<Object> get props => [];
+}
+
+class SignupInitial extends SignupState {
+  const SignupInitial();
+}
+
+class SignUpLoading extends SignupState {
+  const SignUpLoading();
+}
+
+class SignUpSuccess extends SignupState {
+  @override
+  List<Object> get props => [];
+}
+
+class SignUpError extends SignupState {
+  final String message;
+
+  const SignUpError({required this.message});
+
+  @override
+  List<Object> get props => [message];
 }

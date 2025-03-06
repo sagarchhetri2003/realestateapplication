@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:realestateapplication/app/app.dart';
-import 'package:realestateapplication/app/di/di.dart';
-import 'package:realestateapplication/core/network/hive_service.dart';
+import 'package:flutter/services.dart';
+import 'package:food_hub/app/app.dart';
+import 'package:food_hub/app/di/di.dart';
+import 'package:food_hub/core/network/hive_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //  Ensure HiveService initializes properly
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // Initialize Hive Database
   await HiveService.init();
 
-  // Avoid clearing data unless necessary
+  // Delete all the hive data and boxes
   // await HiveService().clearAll();
-
-  // ,,,,,,,,,,,,,,,,,,, Initialize Dependencies
+  // Initialize Dependencies
   await initDependencies();
- 
-  //  Run the App
+
   runApp(const App());
 }

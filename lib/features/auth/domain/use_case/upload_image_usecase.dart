@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-
-import '../../../../app/usecase/usecase.dart';
-import '../../../../core/error/failure.dart';
-import '../../domain/repository/auth_repository.dart';
+import 'package:food_hub/app/usecase/usecase.dart';
+import 'package:food_hub/core/error/failure.dart';
+import 'package:food_hub/features/auth/domain/repository/auth_repository.dart';
 
 class UploadImageParams {
   final File file;
@@ -19,6 +18,7 @@ class UploadImageUsecase
   final IAuthRepository _repository;
 
   UploadImageUsecase(this._repository);
+
   @override
   Future<Either<Failure, String>> call(UploadImageParams params) {
     return _repository.uploadProfilePicture(params.file);

@@ -1,10 +1,8 @@
 // import 'package:dartz/dartz.dart';
 // import 'package:equatable/equatable.dart';
-
-// import '../../../../app/shared_prefs/token_shared_prefs.dart';
-// import '../../../../app/usecase/usecase.dart';
-// import '../../../../core/error/failure.dart';
-// import '../repository/auth_repository.dart';
+// import 'package:food_hub/app/usecase/usecase.dart';
+// import 'package:food_hub/core/error/failure.dart';
+// import 'package:food_hub/features/auth/domain/repository/auth_repository.dart';
 
 // class LoginUserParams extends Equatable {
 //   final String email;
@@ -31,12 +29,12 @@
 // }
 
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../../app/shared_prefs/token_shared_prefs.dart';
-import '../../../../app/usecase/usecase.dart';
-import '../../../../core/error/failure.dart';
-import '../repository/auth_repository.dart';
+import 'package:food_hub/app/shared_prefs/token_shared_prefs.dart';
+import 'package:food_hub/app/usecase/usecase.dart';
+import 'package:food_hub/core/error/failure.dart';
+import 'package:food_hub/features/auth/domain/repository/auth_repository.dart';
 
 class LoginUserParams extends Equatable {
   final String email;
@@ -55,21 +53,20 @@ class LoginUserParams extends Equatable {
 }
 
 class LoginUsecase implements UsecaseWithParams<void, LoginUserParams> {
+  final Dio dio;
   final IAuthRepository authRepository;
   final TokenSharedPrefs tokenSharedPrefs;
 
-  LoginUsecase({required this.authRepository, required this.tokenSharedPrefs});
-
+  LoginUsecase({required this.authRepository, required this.tokenSharedPrefs, required this.dio});
   @override
   Future<Either<Failure, String>> call(LoginUserParams params) {
     //save token in shared preferences
-    return authRepository
-        .loginUser(params.email, params.password)
-        .then((value) {
+    return authRepository.loginUser(params.email, params.password).then((value) {
       return value.fold(
         (failure) => left(failure),
         (token) {
           tokenSharedPrefs.saveToken(token);
+          dio.options.headers['Authorization'] = 'Bearer $token';
           // tokenSharedPrefs.getToken().then((value) {
           //   print(value);
           // });

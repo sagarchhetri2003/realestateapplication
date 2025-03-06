@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:food_hub/core/error/failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../core/error/failure.dart';
 
 class TokenSharedPrefs {
   final SharedPreferences _sharedPreferences;
@@ -11,7 +10,7 @@ class TokenSharedPrefs {
   Future<Either<Failure, void>> saveToken(String token) async {
     try {
       await _sharedPreferences.setString('token', token);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(SharedPrefsFailure(message: e.toString()));
     }
@@ -24,5 +23,9 @@ class TokenSharedPrefs {
     } catch (e) {
       return Left(SharedPrefsFailure(message: e.toString()));
     }
+  }
+
+  Future<void> clearToken() async {
+    await _sharedPreferences.remove('token');
   }
 }
